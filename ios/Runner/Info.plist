@@ -41,5 +41,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>FlutterFlavor</key>
+    <string>$(FLUTTER_FLAVOR)</string>
+    <key>CFBundleDisplayName</key>
+    <string>$(DISPLAY_NAME)</string>
 </dict>
 </plist>
