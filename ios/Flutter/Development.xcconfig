@@ -1,0 +1,4 @@
+FLUTTER_FLAVOR=Development
+PRODUCT_BUNDLE_IDENTIFIER=tech.tokkuengineer.flutter-firebase-sample.development
+DISPLAY_NAME=Dev Firebase Sample
+FLUTTER_TARGET=lib/main.dart
