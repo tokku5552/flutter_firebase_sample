@@ -43,3 +43,4 @@ app.*.map.json
 /android/app/src/production/google-services.json
 /ios/Runner/Firebase/GoogleService-Info-Development.plist
 /ios/Runner/Firebase/GoogleService-Info-Production.plist
+/.fvm/flutter_sdk/
