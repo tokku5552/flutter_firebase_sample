@@ -4,7 +4,8 @@ FROM node:latest
 WORKDIR /workdir
 
 # Firebase toolsのインストール
-RUN apt-get -y update && apt-get install -y sudo openjdk-11-jdk
+RUN apt-get -y update && apt-get install -y sudo
+RUN apt-get -y install openjdk-8-jdk
 RUN npm install -g firebase-tools
 
 # Expose ports
