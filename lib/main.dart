@@ -4,6 +4,7 @@ import 'package:flutter_firebase_sample/presentation/notifier/user_state_notifie
 import 'package:flutter_firebase_sample/presentation/page/login_page.dart';
 import 'package:flutter_firebase_sample/presentation/page/splash_page.dart';
 import 'package:flutter_firebase_sample/presentation/page/top_page.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +15,7 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final userState = useProvider(authStreamProvider);
     return MaterialApp(
       title: 'Flutter SNS Sample',
       theme: ThemeData(
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: StreamBuilder<UserState>(
-        stream: null,
+        stream: userState,
         initialData: null,
         builder: (BuildContext context, AsyncSnapshot<UserState> snapshot) {
           final state = (snapshot.connectionState == ConnectionState.waiting
