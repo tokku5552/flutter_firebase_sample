@@ -1,11 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_sample/controllers/auth_controller.dart';
-import 'package:flutter_firebase_sample/presentation/notifier/user_state_notifier.dart';
 import 'package:flutter_firebase_sample/presentation/page/login_page.dart';
 import 'package:flutter_firebase_sample/presentation/page/splash_page.dart';
 import 'package:flutter_firebase_sample/presentation/page/top_page.dart';
-import 'package:flutter_firebase_sample/repository/auth_repository.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
@@ -37,17 +35,13 @@ class HomeScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
     final authControllerState = useProvider(authControllerProvider);
-    final stream = useProvider(authStreamProvider.stream);
-    final snapshot = useStream(stream, initialData: UserState.waiting);
-    if (snapshot.hasData && snapshot.data != null) {
-      return _convertPage(state: snapshot.data);
-    } else {
-      return SplashPage();
-    }
+    // final stream = useProvider(authStreamProvider.stream);
+    // final snapshot = useStream(stream, initialData: UserState.waiting);
+    return _convertPage(state: authControllerState);
   }
 }
 
-StatelessWidget _convertPage({required UserState? state}) {
+StatelessWidget _convertPage({required UserState state}) {
   switch (state) {
     case UserState.waiting:
       return SplashPage();

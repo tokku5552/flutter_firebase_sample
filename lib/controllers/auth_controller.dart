@@ -4,19 +4,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_firebase_sample/repository/auth_repository.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final authControllerProvider = StateNotifierProvider<AuthController, User?>(
+final authControllerProvider = StateNotifierProvider<AuthController, UserState>(
   (ref) => AuthController(ref.read)..appStarted(),
 );
 
-class AuthController extends StateNotifier<User?> {
+class AuthController extends StateNotifier<UserState> {
   final Reader _read;
   StreamSubscription<User?>? _authStateChangeSubscription;
 
-  AuthController(this._read) : super(null) {
+  AuthController(this._read) : super(UserState.waiting) {
     _authStateChangeSubscription?.cancel();
-    _authStateChangeSubscription = _read(authRepositoryProvider)
-        .authStateChanges
-        .listen((user) => state = user);
+    _authStateChangeSubscription =
+        _read(authRepositoryProvider).authStateChanges.listen((user) {
+      state = UserState.noLogin;
+      if (user != null) {
+        state = UserState.member;
+      }
+    });
   }
   @override
   void dispose() {
@@ -34,4 +38,15 @@ class AuthController extends StateNotifier<User?> {
   void signOut() async {
     await _read(authRepositoryProvider).signOut();
   }
+}
+
+enum UserState {
+  // 初期化中
+  waiting,
+
+  // 未ログイン
+  noLogin,
+
+  //ログイン済み
+  member
 }
