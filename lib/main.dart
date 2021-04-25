@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
 class HomeScreen extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    final authControllerState = useProvider(authControllerProvider);
     final stream = useProvider(authStreamProvider.stream);
     final snapshot = useStream(stream, initialData: UserState.waiting);
     if (snapshot.hasData && snapshot.data != null) {
