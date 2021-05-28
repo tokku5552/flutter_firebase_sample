@@ -12,7 +12,7 @@ class TopPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              'ここに投稿が表示されるようになる',
             ),
           ],
         ),
